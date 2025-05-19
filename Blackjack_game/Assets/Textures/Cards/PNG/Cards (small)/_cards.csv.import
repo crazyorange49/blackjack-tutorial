@@ -1,0 +1,15 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://kvru25kkruds"
+valid=false
+
+[deps]
+
+source_file="res://Assets/Textures/Cards/PNG/Cards (small)/_cards.csv"
+
+[params]
+
+compress=true
+delimiter=0
