@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://jwctmfog4ep7"]
+
+[ext_resource type="Texture2D" uid="uid://dfnvpjtp6hcf8" path="res://Assets/Textures/Cards/PNG/Cards (large)/card_diamonds_05.png" id="1_uvu01"]
+[ext_resource type="Texture2D" uid="uid://tpxytxxj5vk7" path="res://Assets/Textures/Cards/PNG/Cards (large)/card_back.png" id="2_jtbn6"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rjymi"]
+albedo_texture = ExtResource("1_uvu01")
+uv1_scale = Vector3(0.62, 0.885, 1)
+uv1_offset = Vector3(0.19, 0.065, 0)
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tanjl"]
+cull_mode = 1
+albedo_texture = ExtResource("2_jtbn6")
+uv1_scale = Vector3(0.6, 0.89, 1)
+uv1_offset = Vector3(0.205, 0.055, 0)
+texture_filter = 0
+
+[sub_resource type="QuadMesh" id="QuadMesh_q66em"]
+lightmap_size_hint = Vector2i(7, 7)
+
+[node name="Clubs02" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.0530597, 0, 0, 0, 0.0767757, 0, 0, 0, 0.0812627, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_rjymi")
+material_overlay = SubResource("StandardMaterial3D_tanjl")
+mesh = SubResource("QuadMesh_q66em")

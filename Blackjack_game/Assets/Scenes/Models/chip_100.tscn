@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://1iy3cw8yg7t7"]
+
+[ext_resource type="PackedScene" uid="uid://dmnp22hjiujbp" path="res://Assets/Models/Chips/Chip_Orange.glb" id="1_he6wh"]
+[ext_resource type="Script" uid="uid://csof7b65wbx7" path="res://Assets/Scripts/chip.gd" id="2_1hp5q"]
+
+[node name="Chip_100" instance=ExtResource("1_he6wh")]
+script = ExtResource("2_1hp5q")
+
+[node name="Chip" parent="." index="0"]
+transform = Transform3D(0.012, 0, 0, 0, 0.012, 0, 0, 0, 0.012, 0, 0, 0)

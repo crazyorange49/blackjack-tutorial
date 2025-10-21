@@ -1,0 +1,352 @@
+[gd_scene load_steps=8 format=3 uid="uid://bfccd15p6tjgd"]
+
+[ext_resource type="Script" uid="uid://dikywy5epjug" path="res://Assets/Scripts/game_manager.gd" id="1_fsbqx"]
+[ext_resource type="PackedScene" uid="uid://b3s6175jgt7l3" path="res://Assets/Scenes/Models/table.tscn" id="2_cbhea"]
+[ext_resource type="Script" uid="uid://08r5e7e1ob0s" path="res://Assets/Scripts/player_hand.gd" id="2_tanm1"]
+[ext_resource type="Script" uid="uid://cxwohrgn1225u" path="res://Assets/Scripts/dealer_hand.gd" id="3_tanm1"]
+[ext_resource type="Script" uid="uid://dukdte4o35l3f" path="res://Assets/Scripts/chips.gd" id="4_6qsvb"]
+[ext_resource type="FontFile" uid="uid://jck7sb5bsc6w" path="res://Assets/Fonts/Kenney Pixel Square.ttf" id="6_fadmi"]
+[ext_resource type="Script" uid="uid://oqq4phm4tpq" path="res://Assets/Scripts/hud.gd" id="6_shbfh"]
+
+[node name="Main_Menu" type="Node3D"]
+
+[node name="GameManager" type="Node" parent="."]
+script = ExtResource("1_fsbqx")
+
+[node name="Deck" type="Node" parent="GameManager"]
+
+[node name="PlayerHand" type="Node3D" parent="GameManager"]
+transform = Transform3D(0.99863, 0.052336, 0, -0.052336, 0.99863, 0, 0, 0, 1, 0.0065763, 0.02, 0.199999)
+script = ExtResource("2_tanm1")
+
+[node name="DealerHand" type="Node3D" parent="GameManager"]
+transform = Transform3D(0.99863, 0.052336, 0, -0.052336, 0.99863, 0, 0, 0, 1, 0, 0.02, 0.037951)
+script = ExtResource("3_tanm1")
+
+[node name="ChipStack" type="Node3D" parent="GameManager"]
+transform = Transform3D(0.988623, 0, 0.150415, 0, 1, 0, -0.150415, 0, 0.988623, 0.069812, 0.0250025, 0.132542)
+script = ExtResource("4_6qsvb")
+
+[node name="Chip1Spot" type="Node3D" parent="GameManager/ChipStack"]
+transform = Transform3D(0.614707, 0, 0, 0, 0.495993, 0, 0, 0, 0.574658, 0, 0, 0)
+
+[node name="Chip5Spot" type="Node3D" parent="GameManager/ChipStack"]
+transform = Transform3D(0.614707, 0, 0, 0, 0.495993, 0, 0, 0, 0.574658, 0.004, 0, -0.028)
+
+[node name="Chip25Spot" type="Node3D" parent="GameManager/ChipStack"]
+transform = Transform3D(0.614707, 0, 0, 0, 0.495993, 0, 0, 0, 0.574658, 0.025, 0.001, -0.008)
+
+[node name="Chip100Spot" type="Node3D" parent="GameManager/ChipStack"]
+transform = Transform3D(0.614707, 0, 0, 0, 0.495993, 0, 0, 0, 0.574658, -0.022, 0, -0.017)
+
+[node name="Chip500Spot" type="Node3D" parent="GameManager/ChipStack"]
+transform = Transform3D(0.614707, 0, 0, 0, 0.495993, 0, 0, 0, 0.574658, 0.019, 0, 0.019)
+
+[node name="PlayerHandValue" type="Label3D" parent="GameManager"]
+transform = Transform3D(0.054559577, 0.0010674081, -0.008314344, 0.00066641485, 0.028703751, 0.26656023, 0.0016714865, -0.04628556, 0.16511397, -0.028737575, 0.027485017, 0.23394233)
+text = "0"
+font = ExtResource("6_fadmi")
+font_size = 35
+
+[node name="DealerHandValue" type="Label3D" parent="GameManager"]
+transform = Transform3D(0.054559592, 0.0010674088, -0.008314345, 0.00066641415, 0.028703762, 0.26656032, 0.0016714865, -0.04628556, 0.16511397, -0.03199255, 0.02149326, 0.06026257)
+text = "0"
+font = ExtResource("6_fadmi")
+font_size = 35
+
+[node name="Table" parent="." instance=ExtResource("2_cbhea")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0129557, 0, 0.0831299)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.99990255, 0.0096462425, -0.010094217, 0.00032139418, 0.70687383, 0.70733964, 0.013958507, -0.70727384, 0.7068019, 0.014427207, 0.227, 0.334)
+fov = 60.781
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="."]
+transform = Transform3D(0.609288, -0.03182249, 0.79231024, -0.792949, -0.024451831, 0.6087972, -7.10489e-09, -0.9991944, -0.040131822, 0.9918635, 0.329555, 0.0206395)
+spot_range = 1.57937
+spot_angle = 50.8498
+
+[node name="SpotLight3D3" type="SpotLight3D" parent="."]
+transform = Transform3D(-0.6092873, 0.0326769, -0.792276, -0.7929494, -0.024451792, 0.6087968, 0.00052102323, 0.99916685, 0.0408093, -0.6376633, 0.329555, 0.0206395)
+spot_range = 1.57937
+spot_angle = 50.8498
+
+[node name="HUD" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("6_shbfh")
+
+[node name="Lables" type="Control" parent="HUD"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="MoneyLable" type="Label" parent="HUD/Lables"]
+layout_mode = 0
+offset_left = -128.0
+offset_top = -7.0
+offset_right = 136.0
+offset_bottom = 44.0
+theme_override_fonts/font = ExtResource("6_fadmi")
+theme_override_font_sizes/font_size = 29
+text = "Money : $0
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BetLable" type="Label" parent="HUD/Lables"]
+layout_mode = 0
+offset_left = -128.0
+offset_top = -45.0
+offset_right = 136.0
+offset_bottom = 6.0
+theme_override_fonts/font = ExtResource("6_fadmi")
+theme_override_font_sizes/font_size = 29
+text = "Bet : 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="PlayerActions" type="Control" parent="HUD"]
+visible = false
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -114.0
+offset_top = -101.0
+offset_right = 8.0
+offset_bottom = 3.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="HitButton" type="Button" parent="HUD/PlayerActions"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.003
+anchor_top = 0.006
+anchor_right = 0.003
+anchor_bottom = 0.006
+offset_left = 2.88
+offset_top = 3.76
+offset_right = 112.88
+offset_bottom = 47.76
+theme_override_fonts/font = ExtResource("6_fadmi")
+theme_override_font_sizes/font_size = 24
+text = "hit"
+
+[node name="StandButton" type="Button" parent="HUD/PlayerActions"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.003
+anchor_top = 0.006
+anchor_right = 0.003
+anchor_bottom = 0.006
+offset_left = 2.88
+offset_top = 54.76
+offset_right = 112.88
+offset_bottom = 98.76
+theme_override_fonts/font = ExtResource("6_fadmi")
+theme_override_font_sizes/font_size = 24
+text = "stand"
+
+[node name="BetControls" type="Control" parent="HUD"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = -322.0
+offset_right = -1.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="BetButtons" type="Control" parent="HUD/BetControls"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = -37.0
+offset_right = 45.0
+offset_bottom = 3.0
+grow_vertical = 0
+
+[node name="DealButton" type="Button" parent="HUD/BetControls/BetButtons"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.003
+anchor_top = 0.006
+anchor_right = 0.003
+anchor_bottom = 0.006
+offset_left = -1.12
+offset_top = -275.24
+offset_right = 108.88
+offset_bottom = -231.24
+theme_override_fonts/font = ExtResource("6_fadmi")
+theme_override_font_sizes/font_size = 24
+text = "DEAL"
+
+[node name="Bet$1" type="Button" parent="HUD/BetControls/BetButtons"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = -220.11
+offset_right = 109.0
+offset_bottom = -176.11
+theme_override_fonts/font = ExtResource("6_fadmi")
+theme_override_font_sizes/font_size = 24
+text = "$1"
+
+[node name="Bet$5" type="Button" parent="HUD/BetControls/BetButtons"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = -168.0
+offset_right = 109.0
+offset_bottom = -124.0
+theme_override_fonts/font = ExtResource("6_fadmi")
+theme_override_font_sizes/font_size = 24
+text = "$5"
+
+[node name="Bet$25" type="Button" parent="HUD/BetControls/BetButtons"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = -115.07
+offset_right = 109.0
+offset_bottom = -71.07
+theme_override_fonts/font = ExtResource("6_fadmi")
+theme_override_font_sizes/font_size = 24
+text = "$25"
+
+[node name="Bet$100" type="Button" parent="HUD/BetControls/BetButtons"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = -62.965
+offset_right = 109.0
+offset_bottom = -18.965
+theme_override_fonts/font = ExtResource("6_fadmi")
+theme_override_font_sizes/font_size = 24
+text = "$100"
+
+[node name="Bet$500" type="Button" parent="HUD/BetControls/BetButtons"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = -12.0
+offset_right = 109.0
+offset_bottom = 32.0
+theme_override_fonts/font = ExtResource("6_fadmi")
+theme_override_font_sizes/font_size = 24
+text = "$500"
+
+[node name="SubtractionButtons" type="Control" parent="HUD/BetControls"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -35.0
+offset_top = -18.0
+offset_right = 5.0
+offset_bottom = 22.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="ClearButton" type="Button" parent="HUD/BetControls/SubtractionButtons"]
+layout_mode = 0
+offset_left = -78.0
+offset_top = -292.0
+offset_right = 32.0
+offset_bottom = -248.0
+theme_override_fonts/font = ExtResource("6_fadmi")
+theme_override_font_sizes/font_size = 24
+text = "CLEAR
+"
+
+[node name="Subtract$1" type="Button" parent="HUD/BetControls/SubtractionButtons"]
+layout_mode = 0
+offset_left = -78.0
+offset_top = -237.0
+offset_right = 32.0
+offset_bottom = -193.0
+theme_override_fonts/font = ExtResource("6_fadmi")
+theme_override_font_sizes/font_size = 24
+text = "-$1"
+
+[node name="Subtract$5" type="Button" parent="HUD/BetControls/SubtractionButtons"]
+layout_mode = 0
+offset_left = -78.0
+offset_top = -184.89
+offset_right = 32.0
+offset_bottom = -140.89
+theme_override_fonts/font = ExtResource("6_fadmi")
+theme_override_font_sizes/font_size = 24
+text = "-$5"
+
+[node name="Subtract$25" type="Button" parent="HUD/BetControls/SubtractionButtons"]
+layout_mode = 0
+offset_left = -78.0
+offset_top = -131.96
+offset_right = 32.0
+offset_bottom = -87.96
+theme_override_fonts/font = ExtResource("6_fadmi")
+theme_override_font_sizes/font_size = 24
+text = "-$25"
+
+[node name="Subtract$100" type="Button" parent="HUD/BetControls/SubtractionButtons"]
+layout_mode = 0
+offset_left = -78.0
+offset_top = -79.855
+offset_right = 32.0
+offset_bottom = -35.855
+theme_override_fonts/font = ExtResource("6_fadmi")
+theme_override_font_sizes/font_size = 24
+text = "-$100"
+
+[node name="Subtract$500" type="Button" parent="HUD/BetControls/SubtractionButtons"]
+layout_mode = 0
+offset_left = -79.0
+offset_top = -29.0
+offset_right = 31.0
+offset_bottom = 15.0
+theme_override_fonts/font = ExtResource("6_fadmi")
+theme_override_font_sizes/font_size = 24
+text = "-$500"
+
+[connection signal="deal_finished" from="GameManager" to="HUD" method="_update_player_actions" binds= [true]]
+[connection signal="game_ended" from="GameManager" to="HUD" method="_game_end"]
+[connection signal="game_started" from="GameManager" to="HUD" method="_update_bet_controls" binds= [false]]
+[connection signal="game_lost" from="GameManager/PlayerHand" to="GameManager" method="_reset_game"]
+[connection signal="dealer_hit" from="GameManager/DealerHand" to="GameManager" method="deal_card"]
+[connection signal="dealer_stand" from="GameManager/DealerHand" to="GameManager" method="_end_game_calculations"]
+[connection signal="game_won" from="GameManager/DealerHand" to="GameManager" method="_player_won"]
+[connection signal="bet_changed" from="GameManager/ChipStack" to="HUD" method="_update_lables"]
+[connection signal="pressed" from="HUD/PlayerActions/HitButton" to="GameManager/PlayerHand" method="_hit"]
+[connection signal="pressed" from="HUD/PlayerActions/StandButton" to="GameManager/DealerHand" method="_dealer_turn"]
+[connection signal="pressed" from="HUD/PlayerActions/StandButton" to="HUD" method="_update_player_actions" binds= [false]]
+[connection signal="pressed" from="HUD/BetControls/BetButtons/DealButton" to="GameManager" method="init_game"]
+[connection signal="pressed" from="HUD/BetControls/BetButtons/Bet$1" to="GameManager/ChipStack" method="_on_bet_pressed" binds= [1]]
+[connection signal="pressed" from="HUD/BetControls/BetButtons/Bet$5" to="GameManager/ChipStack" method="_on_bet_pressed" binds= [5]]
+[connection signal="pressed" from="HUD/BetControls/BetButtons/Bet$25" to="GameManager/ChipStack" method="_on_bet_pressed" binds= [25]]
+[connection signal="pressed" from="HUD/BetControls/BetButtons/Bet$100" to="GameManager/ChipStack" method="_on_bet_pressed" binds= [100]]
+[connection signal="pressed" from="HUD/BetControls/BetButtons/Bet$500" to="GameManager/ChipStack" method="_on_bet_pressed" binds= [500]]
+[connection signal="pressed" from="HUD/BetControls/SubtractionButtons/ClearButton" to="GameManager/ChipStack" method="_on_clear_button_pressed"]
+[connection signal="pressed" from="HUD/BetControls/SubtractionButtons/Subtract$1" to="GameManager/ChipStack" method="_on_subtract_pressed" binds= [1]]
+[connection signal="pressed" from="HUD/BetControls/SubtractionButtons/Subtract$5" to="GameManager/ChipStack" method="_on_subtract_pressed" binds= [5]]
+[connection signal="pressed" from="HUD/BetControls/SubtractionButtons/Subtract$25" to="GameManager/ChipStack" method="_on_subtract_pressed" binds= [25]]
+[connection signal="pressed" from="HUD/BetControls/SubtractionButtons/Subtract$100" to="GameManager/ChipStack" method="_on_subtract_pressed" binds= [100]]
+[connection signal="pressed" from="HUD/BetControls/SubtractionButtons/Subtract$500" to="GameManager/ChipStack" method="_on_subtract_pressed" binds= [500]]

@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://b3s6175jgt7l3"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6gjl5"]
+albedo_color = Color(0.04977689, 0.2173, 1.2032687e-07, 1)
+metallic_specular = 0.11
+refraction_scale = 0.6
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_va08c"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ie65k"]
+albedo_color = Color(0.321706, 0.189086, 9.62615e-08, 1)
+
+[sub_resource type="TorusMesh" id="TorusMesh_0i117"]
+outer_radius = 0.428
+rings = 31
+ring_segments = 19
+
+[node name="Table" type="Node3D"]
+
+[node name="MainTable" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.637856, 0, 0, 0, 0.0151442, 0, 0, 0, 0.624233, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_6gjl5")
+mesh = SubResource("CylinderMesh_va08c")
+
+[node name="TableBorder" type="MeshInstance3D" parent="MainTable"]
+transform = Transform3D(1, 0, 0, 0, 105.209, 0, 0, 0, 1, 0, -1.63576, 0)
+material_override = SubResource("StandardMaterial3D_ie65k")
+mesh = SubResource("TorusMesh_0i117")

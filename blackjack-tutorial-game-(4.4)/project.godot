@@ -1,0 +1,16 @@
+config_version=5
+
+[application]
+
+config/name="Blackjack_tutorial_game (4.4)"
+run/main_scene="uid://bfccd15p6tjgd"
+config/features=PackedStringArray("4.4", "Forward Plus")
+config/icon="res://icon.svg"
+
+[autoload]
+
+Main="*res://Assets/Scripts/main.gd"
+
+[filesystem]
+
+import/blender/enabled=false
