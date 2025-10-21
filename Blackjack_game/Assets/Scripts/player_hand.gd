@@ -36,8 +36,6 @@ func giveCard(card, flipped: bool):
 	update_hand_value_display()
 
 func check_hand() -> bool:
-	if getValue() == MAX_HAND_VALUE:
-		game_lost.emit()
 	if getValue() > MAX_HAND_VALUE:
 		return false
 	return true
