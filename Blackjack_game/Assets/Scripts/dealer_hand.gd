@@ -15,6 +15,7 @@ var aces_as_eleven = 0
 var last_card = null
 
 func clear_hand():
+	# resets the hand values and removes all the card in the object by iterating and freeing each child then updates the displayed hand value
 	cards_in_hand.clear()
 	last_card = null
 	aces_as_eleven = 0
@@ -26,6 +27,7 @@ func clear_hand():
 
 
 func getValue() -> int:
+	# returns the current value and will subtract 10 from the hand value if the hand value exceeds MAX_HAND_VALUE and has aces to set to value of 1 
 	while(hand_value > MAX_HAND_VALUE and aces_as_eleven>0):
 		hand_value -= 10
 		aces_as_eleven -= 1
@@ -38,6 +40,7 @@ func check_hand() -> bool:
 	
 
 func giveCard(card, flipped: bool):
+	# adds the given card to the cards_in_hand list then increments the hand_value by the cards value and counts it as an ace if the card value is == 11, then updates the displayed hand value
 	cards_in_hand.append(card)
 	var card_value = card.value
 	hand_value += card_value
@@ -49,10 +52,12 @@ func giveCard(card, flipped: bool):
 
 
 func update_hand_value_display():
-	dealer_hand_value.text = str(clamp(getValue(), 0, 21) - (flipped_card.value if flipped_card != null else 0))
+	dealer_hand_value.text = str(clamp(getValue(), 0, 99) - (flipped_card.value if flipped_card != null else 0))
 
 
 func _dealer_turn():
+	# flips the dealers first card then begins the dealers turn
+	# while the hand value is <= 16 the dealer will request another card until either the hand value goes above 16 or MAX_HAND_VALUE
 	flipped_card.card_scene.rotation_degrees = Vector3(-90,0,0)
 	flipped_card = null
 	update_hand_value_display()
