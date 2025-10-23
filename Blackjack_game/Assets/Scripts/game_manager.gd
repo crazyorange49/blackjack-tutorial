@@ -78,14 +78,14 @@ func _end_game_calculations() -> void:
 		_player_won()
 	else:
 		_reset_game()
-
+		
 func _player_won(is_pass:bool=false) -> void:
 	var payout = 0
 	if not is_pass:
 		if player_hand.hand_value == 21:
 			payout = ((chip_stack.total_bet / 2) * 3) + chip_stack.total_bet
 		else:
-			payout = ((chip_stack.total_bet / 1) * 3) + chip_stack.total_bet
+			payout = chip_stack.total_bet + chip_stack.total_bet
 	else:
 		payout = chip_stack.total_bet
 	Main.money += payout

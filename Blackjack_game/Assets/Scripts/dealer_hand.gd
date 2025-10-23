@@ -49,7 +49,7 @@ func giveCard(card, flipped: bool):
 
 
 func update_hand_value_display():
-	dealer_hand_value.text = str(clamp(getValue(), 0, 21) - (flipped_card.value if flipped_card != null else 0))
+	dealer_hand_value.text = str(clamp(getValue(), 0, 99) - (flipped_card.value if flipped_card != null else 0))
 
 
 func _dealer_turn():
