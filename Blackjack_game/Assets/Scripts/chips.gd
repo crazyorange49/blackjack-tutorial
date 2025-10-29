@@ -3,6 +3,7 @@ extends Node3D
 const CHIP_SPACING = 0.002
 
 signal bet_changed
+signal chip_added
 
 var total_bet = 0
 var chips_in_stack: Array = []
@@ -22,7 +23,7 @@ func _on_bet_pressed(bet_amount: int) -> void:
 		return
 	self.total_bet += bet_amount
 	Main.money -= bet_amount
-	var last_chip_of_value: Node3D = get_recent_chip_of_value(bet_amount)	
+	var last_chip_of_value: Node3D = get_recent_chip_of_value(bet_amount)
 	var chip_position = get_node("Chip" + str(bet_amount) + "Spot").position
 	chip_position = Vector3(chip_position.x, 
 							last_chip_of_value.position.y + CHIP_SPACING if last_chip_of_value else chip_position.y,
@@ -35,6 +36,7 @@ func _on_bet_pressed(bet_amount: int) -> void:
 	chips_in_stack.append(chip)
 	chip.position = chip_position
 	chip.rotation_degrees.y = rng.randi_range(0, 360)
+	chip_added.emit(true if last_chip_of_value == null else false)
 	bet_changed.emit()
 	
 

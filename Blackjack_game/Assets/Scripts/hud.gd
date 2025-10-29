@@ -13,7 +13,7 @@ extends Control
 func _ready() -> void:
 	_update_lables()
 
-func _update_lables() -> void: 
+func _update_lables(placeHolder=false) -> void: 
 	money_lable.text = "money : $" + str(Main.money)
 	bet_lable.text = "bet : $" + str(chip_stack.total_bet)
 	

@@ -12,6 +12,7 @@ var cards_in_hand = []
 var hand_value = 0
 var aces_as_eleven = 0
 var last_card = null
+var flipped_card = null
 
 func clear_hand():
 	last_card = null
@@ -31,6 +32,8 @@ func giveCard(card, flipped: bool):
 	cards_in_hand.append(card)
 	var card_value = card.value
 	hand_value += card_value
+	if flipped:
+		flipped_card = card
 	if card_value == 11:
 		aces_as_eleven += 1
 	update_hand_value_display()

@@ -2,6 +2,7 @@ extends Node
 const card_class = preload("card.gd")
 
 signal no_bet
+signal card_delt
 signal game_started
 signal deal_finished
 signal game_ended
@@ -63,6 +64,7 @@ func deal_card(hand: Node3D, flip: bool = false) -> bool:
 	hand.move_child(card_scene, 0)
 	card_scene.position = card_position
 	card_scene.rotation_degrees = card_rotation
+	card_delt.emit()
 	hand.giveCard(card, flip)
 	hand.last_card = card_scene
 	if not hand.check_hand():
@@ -72,7 +74,7 @@ func deal_card(hand: Node3D, flip: bool = false) -> bool:
 func _end_game_calculations() -> void:
 	var dealer_value = dealer_hand.hand_value
 	var player_value = player_hand.hand_value
-	if dealer_value == 21 and player_value == 21:
+	if dealer_value == player_value:
 		_player_won(true)
 	elif player_value > dealer_value:
 		_player_won()
@@ -83,7 +85,7 @@ func _player_won(is_pass:bool=false) -> void:
 	var payout = 0
 	if not is_pass:
 		if player_hand.hand_value == 21:
-			payout = ((chip_stack.total_bet / 2) * 3) + chip_stack.total_bet
+			payout = (chip_stack.total_bet * 1.5) + chip_stack.total_bet
 		else:
 			payout = chip_stack.total_bet + chip_stack.total_bet
 	else:

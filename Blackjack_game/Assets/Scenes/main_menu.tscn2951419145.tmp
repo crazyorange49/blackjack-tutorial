@@ -352,7 +352,6 @@ stream = SubResource("AudioStreamPolyphonic_hxcs8")
 [connection signal="dealer_stand" from="GameManager/DealerHand" to="GameManager" method="_end_game_calculations"]
 [connection signal="game_won" from="GameManager/DealerHand" to="GameManager" method="_player_won"]
 [connection signal="bet_changed" from="GameManager/ChipStack" to="HUD" method="_update_lables"]
-[connection signal="chip_added" from="GameManager/ChipStack" to="AudioHandler" method="_chip_placement"]
 [connection signal="pressed" from="HUD/PlayerActions/HitButton" to="GameManager/PlayerHand" method="_hit"]
 [connection signal="pressed" from="HUD/PlayerActions/StandButton" to="GameManager/DealerHand" method="_dealer_turn"]
 [connection signal="pressed" from="HUD/PlayerActions/StandButton" to="HUD" method="_update_player_actions" binds= [false]]
