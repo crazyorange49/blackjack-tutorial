@@ -4,6 +4,7 @@ const card_class = preload("card.gd")
 signal no_bet
 signal card_delt
 signal game_started
+signal table_set
 signal deal_finished
 signal game_ended
 
@@ -13,12 +14,18 @@ signal game_ended
 @onready var chip_stack: Node3D = $ChipStack
 
 
+
 var Deck_array = []
+var numCardsFreed = 0
 
 var rng = RandomNumberGenerator.new()
 const CARD_SPACING = 0.014
 const CARD_PRIOTIRY_SPACING = 0.00075
 const DELAY_TIME = 0.6
+
+func _set_table() -> void:
+	init_deck()
+	table_set.emit()
 
 func _ready() -> void:
 	init_deck()
@@ -96,9 +103,12 @@ func _player_won(is_pass:bool=false) -> void:
 func _reset_game() -> void:
 	player_hand.clear_hand()
 	dealer_hand.clear_hand()
+	for child in deck.get_children():
+		child.free()
+		numCardsFreed += 1
 	Deck_array.clear()
 	chip_stack._on_clear_button_pressed(true)
-	for child in deck.get_children():
-		child.queue_free()
 	init_deck()
 	game_ended.emit()
+	print("Number of Cards freed " + str(numCardsFreed))
+	numCardsFreed = 0

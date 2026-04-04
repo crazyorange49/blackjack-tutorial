@@ -1,0 +1,106 @@
+[gd_scene format=3 uid="uid://vrbnwukka014"]
+
+[ext_resource type="Script" uid="uid://b8arnaqk6ieqh" path="res://Assets/Scenes/Cards/Menu/menu_card.gd" id="1_1ao4h"]
+[ext_resource type="Texture2D" uid="uid://tpxytxxj5vk7" path="res://Assets/Textures/Cards/PNG/Cards (large)/card_back.png" id="2_vmr8u"]
+
+[sub_resource type="Animation" id="Animation_1ao4h"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StaticBody3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StaticBody3D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_odw83"]
+resource_name = "pick_up"
+length = 0.18
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StaticBody3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.18),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0.05)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StaticBody3D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.18),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.3298672, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1ao4h"]
+_data = {
+&"RESET": SubResource("Animation_1ao4h"),
+&"pick_up": SubResource("Animation_odw83")
+}
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2qrag"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tanjl"]
+cull_mode = 1
+albedo_texture = ExtResource("2_vmr8u")
+subsurf_scatter_strength = 1.0
+uv1_scale = Vector3(0.6, 0.89, 1)
+uv1_offset = Vector3(0.205, 0.055, 0)
+texture_filter = 0
+
+[sub_resource type="QuadMesh" id="QuadMesh_q66em"]
+lightmap_size_hint = Vector2i(7, 7)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bdqhf"]
+size = Vector3(0.057907104, 0.08157539, 0.012329102)
+
+[node name="Play Card" type="Node3D" unique_id=922584210]
+transform = Transform3D(1, 0, 0, 0, 0.05233597, 0.99862945, 0, -0.99862945, 0.05233597, 0, 0, 0)
+script = ExtResource("1_1ao4h")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=101253718]
+libraries/ = SubResource("AnimationLibrary_1ao4h")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=939109699]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=2033373453]
+transform = Transform3D(0.0530597, 0, 0, 0, 0.0767757, -4.656613e-10, 0, 0, 0.0812627, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_2qrag")
+material_overlay = SubResource("StandardMaterial3D_tanjl")
+mesh = SubResource("QuadMesh_q66em")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1717594501]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0001296997, -0.0004301067, 6.1035113e-05)
+shape = SubResource("BoxShape3D_bdqhf")
+
+[connection signal="input_event" from="StaticBody3D" to="." method="_input_event"]
+[connection signal="mouse_entered" from="StaticBody3D" to="." method="_mouse_enter"]
+[connection signal="mouse_exited" from="StaticBody3D" to="." method="_mouse_exit"]

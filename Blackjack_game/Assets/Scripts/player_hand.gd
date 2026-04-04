@@ -19,7 +19,7 @@ func clear_hand():
 	aces_as_eleven = 0
 	hand_value = 0
 	for child in self.get_children():
-		child.free()
+		child.queue_free()
 	update_hand_value_display()
 
 func getValue() -> int:
@@ -44,7 +44,13 @@ func check_hand() -> bool:
 	return true
 
 func update_hand_value_display():
-	player_hand_value.text = str(clamp(getValue(), 0, 99))
+	var updated_hand_value = clamp(getValue(), 0, 99)
+	if updated_hand_value > 0:
+		player_hand_value.visible = true
+		player_hand_value.text = str(updated_hand_value)
+	else:
+		player_hand_value.visible = false
+		
 
 func _hit():
 	var deal_card_status: bool = game_manager.deal_card(self)

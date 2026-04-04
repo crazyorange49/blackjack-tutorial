@@ -22,7 +22,7 @@ func clear_hand():
 	hand_value = 0
 	flipped_card = null
 	for child in self.get_children():
-		child.free()
+		child.queue_free()
 	update_hand_value_display()
 
 
@@ -52,8 +52,12 @@ func giveCard(card, flipped: bool):
 
 
 func update_hand_value_display():
-	dealer_hand_value.text = str(clamp(getValue(), 0, 99) - (flipped_card.value if flipped_card != null else 0))
-
+	var updated_hand_value = clamp(getValue(), 0, 99) - (flipped_card.value if flipped_card != null else 0)
+	if updated_hand_value > 0:
+		dealer_hand_value.visible = true
+		dealer_hand_value.text = str(updated_hand_value)
+	else:
+		dealer_hand_value.visible = false
 
 func _dealer_turn():
 	# flips the dealers first card then begins the dealers turn

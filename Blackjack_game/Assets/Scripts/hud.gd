@@ -7,6 +7,7 @@ extends Control
 @onready var subtraction_buttons: Control = $BetControls/SubtractionButtons
 @onready var player_actions: Control = $PlayerActions
 @onready var bet_controls: Control = $BetControls
+@onready var menu: Node3D = $Menu
 
 
 # Called when the node enters the scene tree for the first time.
@@ -30,3 +31,8 @@ func _game_end() -> void:
 func _update_ui(state: bool) -> void:
 	bet_controls.visible = state
 	player_actions.visible = state
+
+
+func _on_table_set() -> void:
+	self.show()
+	menu.hide()

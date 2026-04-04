@@ -1,5 +1,3 @@
-extends Node3D
-
 var value = 0
 var card_scene: Node3D
 
